@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import com.capgemini.Exception.*;
 import  com.capgemini.beans.*;
 public class HDFCBank implements Bank{
-	LinkedList <Account> accounts=new LinkedList<>();
+	private LinkedList <Account> accounts=new LinkedList<>();
     public String createAccount(int accountNumber,int amount) throws InsufficientOpeningAmountException {
     	Account account=new Account();
     	account.setAccountNumber(accountNumber);
@@ -42,16 +42,16 @@ public class HDFCBank implements Bank{
     		account.setAmount(account.getAmount()+amount);
     		return account.getAmount(); 	
     }
-    public int[] fundTransfer(int accountNumber1,int accountNumber2,int amount)throws InvalidAccountNumberException,InsufficientBalanceException {
+    public int[] fundTransfer(int senderAccount,int receiverAccount,int amount)throws InvalidAccountNumberException,InsufficientBalanceException {
     	{
-    		Account account1=searchAccount(accountNumber1);
-    		Account account2=searchAccount(accountNumber2);
-    		if((account1.getAmount()-amount)>=0)
+    		Account sender=searchAccount(senderAccount);
+    		Account receiver=searchAccount(receiverAccount);
+    		if((sender.getAmount()-amount)>=0)
     		{
-    			int[] a= {account1.getAmount()-amount,account2.getAmount()+amount};
-    			account1.setAmount(account1.getAmount()-amount);
-    			account2.setAmount(account2.getAmount()+amount);
-    			return a;
+    			sender.setAmount(sender.getAmount()-amount);
+    			receiver.setAmount(receiver.getAmount()+amount);
+			int[] transfer= {sender.getAmount(),receiver.getAmount()};
+    			return transfer;
     		}
     	
     	}
