@@ -30,8 +30,8 @@ public class Client {
 		}
 		try {
 			System.out.println("fund transfer");
-			int []a=bank.fundTransfer(101, 102, 300);
-			System.out.println("new balance of account number 101: "+a[0]+"  New balance of account number 102 : "+a[1]);
+			int []transfer=bank.fundTransfer(101, 102, 300);
+			System.out.println("new balance of account number 101: "+transfer[0]+"  New balance of account number 102 : "+transfer[1]);
 		}catch(InsufficientBalanceException inb) {
 			System.out.println("insufficient balance");
 		}catch(InvalidAccountNumberException ina) {
